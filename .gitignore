@@ -1,0 +1,4 @@
+.DS_Store
+
+# Heavy outputs from sketches
+*.tif
