@@ -1,4 +1,16 @@
-// Simple setup for drawing on mouse-press
+// Sketch vars
+int strokesWidth = 2;
+float lineHeight;
+float xDistance;
+int horizontalSteps = 10;
+
+  // For mouse smooth
+float cursorX, cursorY;
+float cofX = 0.05;
+float cofY = 0.1;
+
+// ********************************************************************************************************************
+
 int    stageW     = 1080;
 int    stageH     = 720;
 float  halfWidth, halfHeight;
@@ -23,18 +35,7 @@ PGraphics user_canvas;
 
 // ********************************************************************************************************************
 
-// Sketch vars
-int strokesWidth = 2;
-float lineHeight;
-float xDistance;
-int horizontalSteps = 50;
 
-  // For mouse smooth
-float cursorX, cursorY;
-float cofX = 0.05;
-float cofY = 0.1;
-
-// ********************************************************************************************************************
 
 void settings() {
   //size(stageW, stageH);
@@ -77,7 +78,7 @@ void draw(){
   //background(clrBG);
   
   // Step 2: Print what user has drawn in the buffer
-  //image(user_canvas, 0, 0);
+  image(user_canvas, 0, 0);
   
   // Step 3: Show a preview of the brush
   if (brushFlag) {

@@ -1,4 +1,16 @@
-// Simple setup for drawing on mouse-press
+// Sketch vars
+float x0, y0, radius;
+float PI2 = PI * 2;
+int shape_steps = 10;
+PVector[] vectors = new PVector[shape_steps];
+
+
+  // For mouse smooth
+float cursorX, cursorY;
+float cof = 0.2;
+
+// ********************************************************************************************************************
+
 int    stageW     = 1080;
 int    stageH     = 720;
 float  halfWidth, halfHeight;
@@ -23,22 +35,7 @@ PGraphics user_canvas;
 
 // ********************************************************************************************************************
 
-// Sketch vars
-float x0, y0, radius;
-float PI2 = PI * 2;
-int shape_steps = 10;
-PVector[] vectors = new PVector[shape_steps];
 
-//x1 = x0 + r cos(angle)
-//y1 = y0 + r sin(angle)
-//angle most be specified from 0 to 2pi
-
-
-  // For mouse smooth
-float cursorX, cursorY;
-float cof = 0.2;
-
-// ********************************************************************************************************************
 
 void settings() {
   //size(stageW, stageH);

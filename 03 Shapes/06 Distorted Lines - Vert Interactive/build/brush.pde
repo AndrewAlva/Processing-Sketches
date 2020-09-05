@@ -23,11 +23,12 @@ void bufferBrush() {
     //user_canvas.fill(curLight1R, curLight1G, curLight1B);
     user_canvas.noFill();
     
-    user_canvas.pushMatrix();
-      user_canvas.translate(halfWidth, halfHeight);
-      //user_canvas.rotate(radians(cFrame % 360) );
-      bufferDrawing();
-    user_canvas.popMatrix();
+    for(int i = 0; i <= horizontalSteps; i++) {
+      user_canvas.pushMatrix();
+        user_canvas.translate( (width / horizontalSteps * i), height);
+        bufferDrawing();
+      user_canvas.popMatrix();
+    }
 
   user_canvas.endDraw();
   

@@ -1,4 +1,17 @@
-// Simple setup for drawing on mouse-press
+// Sketch vars
+int strokesWidth = 2;
+float lineHeight;
+float xDistance;
+int circleSteps = 20;
+float distortionRatio = 0;
+
+  // For mouse smooth
+float cursorX, cursorY;
+float cofX = 0.05;
+float cofY = 0.1;
+
+// ********************************************************************************************************************
+
 int    stageW     = 1080;
 int    stageH     = 720;
 float  halfWidth, halfHeight;
@@ -23,19 +36,7 @@ PGraphics user_canvas;
 
 // ********************************************************************************************************************
 
-// Sketch vars
-int strokesWidth = 2;
-float lineHeight;
-float xDistance;
-int circleSteps = 20;
-float distortionRatio = 0;
 
-  // For mouse smooth
-float cursorX, cursorY;
-float cofX = 0.05;
-float cofY = 0.1;
-
-// ********************************************************************************************************************
 
 void settings() {
   //size(stageW, stageH);

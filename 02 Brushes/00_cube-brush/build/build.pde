@@ -1,3 +1,6 @@
+// PRECAUCIÓN en este, cada vez que hagas click se guardará una imagen.
+// Los ejercicios que siguen tienen un método más controlado para exportar imágenes.
+
 int    stageW   = 1080;
 int    stageH   = 720;
 color  clrBG    = #ffffff;

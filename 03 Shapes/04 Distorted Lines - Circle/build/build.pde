@@ -1,11 +1,20 @@
-// Simple setup for drawing on mouse-press
-int    stageW   = 1080;
-int    stageH   = 720;
-color  clrBG    = #090909;
-String pathDATA = "../data/";
+// Sketch vars
+float PI2 = PI * 2;
+int strokesWidth = 2;
+
+  // For mouse smooth
+float cursorX, cursorY;
+float cof = 0.2;
+
+// ********************************************************************************************************************
+
+int    stageW     = 1080;
+int    stageH     = 720;
+float  halfWidth, halfHeight;
+color  clrBG      = #000000;
+String pathDATA   = "../data/";
 boolean brushFlag = true;
-int    cFrame   = 0; // Custom frame count
-int    cFrameAccel   = 0; // Custom frame count
+int    cFrame     = 0; // Custom frame count
 
 // ********************************************************************************************************************
 
@@ -23,18 +32,7 @@ PGraphics user_canvas;
 
 // ********************************************************************************************************************
 
-// Sketch vars
-  // For waves
-float noiseScale = 0.008;
-float spikeScale = 500;
-int spikeSpace = 5;
-int spikeStroke = 6;
 
-  // For mouse smooth
-float cursorX, cursorY;
-float cof = 0.1;
-
-// ********************************************************************************************************************
 
 void settings() {
   //size(stageW, stageH);
@@ -43,12 +41,16 @@ void settings() {
 
 
 void setup(){
-  cursorX = width / 2;
-  cursorY = height / 2; 
+  halfWidth = width / 2;
+  halfHeight = height / 2;
+  
+  cursorX = halfWidth;
+  cursorY = halfHeight; 
   
   background(clrBG);
+  smooth();
 
-  lightColor1 = loadImage(pathDATA + "color_003.jpg");
+  lightColor1 = loadImage(pathDATA + "color_001.png");
   
   user_canvas = createGraphics(width, height);
 }
@@ -56,6 +58,14 @@ void setup(){
 
 void draw(){
   updateCursor();
+  
+  // TAKE COLORS FROM IMAGE
+  lightPos1 = (cFrame*5)%lightColor1.width;
+
+  curLight1 = lightColor1.get(lightPos1,1);
+  curLight1R = red(curLight1);
+  curLight1G = green(curLight1);
+  curLight1B = blue(curLight1);
   
   // Step 1: Paint background
   background(clrBG, 0.1);
@@ -74,6 +84,5 @@ void draw(){
     bufferBrush();
   }
   
-  cFrame += spikeSpace * 2; // Update from count to move in color position
-  cFrameAccel += spikeSpace * 5;
+  cFrame += strokesWidth; // Update from count to move in color position
 }

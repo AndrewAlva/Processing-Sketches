@@ -1,4 +1,12 @@
-// Simple setup for drawing on mousepressed
+// Sketch vars
+float cubeSize = 100;
+float cubeScale;
+float scaleSpeed = 0.01;
+int   cubeRepetitions = 5;
+float repetitionsSpacing = 0;
+
+// ********************************************************************************************************************
+
 int    stageW   = 1080;
 int    stageH   = 720;
 color  clrBG    = #ffffff;
@@ -6,11 +14,6 @@ String pathDATA = "../../data/";
 int    cFrame   = 150; // Custom frame count
 boolean brushFlag = true;
 
-float cubeSize = 1200;
-float cubeScale;
-float scaleSpeed = 0.01;
-int   cubeRepetitions = 5;
-float repetitionsSpacing = 0;
 
 // ********************************************************************************************************************
 
