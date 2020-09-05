@@ -1,20 +1,33 @@
 // Sketch vars
-float PI2 = PI * 2;
-int strokesWidth = 2;
+  // For waves
+float noiseScale = 0.008;
+float spikeScale = 500;
+int spikeSpace = 100;
+int spikeStroke = 15;
+float accel = 2;
+boolean lineFlag = true;
 
   // For mouse smooth
 float cursorX, cursorY;
-float cof = 0.2;
+float cofX = 0.05;
+float cofY = 0.1;
+
+// ****** LEAP SETUP **************************************************************************************************************
+
+import de.voidplus.leapmotion.*;
+LeapMotion leap;
+float RindexX, RindexY;
 
 // ********************************************************************************************************************
 
-int    stageW     = 1080;
-int    stageH     = 720;
-float  halfWidth, halfHeight;
-color  clrBG      = #000000;
+// Canvas setup
+int    stageW   = 1080;
+int    stageH   = 720;
+color  clrBG    = #090909;
 String pathDATA = "../../_data/";
 boolean brushFlag = true;
-int    cFrame     = 0; // Custom frame count
+int    cFrame   = 0; // Custom frame count
+int    cFrameAccel   = 0; // Custom frame count
 
 // ********************************************************************************************************************
 
@@ -27,7 +40,7 @@ float curLight1R, curLight1G, curLight1B;
 
 // ********************************************************************************************************************
 
-// Graphic that will store canvas sketch
+// Graphic buffer that will store canvas sketch
 PGraphics user_canvas;
 
 // ********************************************************************************************************************
@@ -41,34 +54,25 @@ void settings() {
 
 
 void setup(){
-  halfWidth = width / 2;
-  halfHeight = height / 2;
-  
-  cursorX = halfWidth;
-  cursorY = halfHeight; 
+  cursorX = width / 2;
+  cursorY = height / 2; 
   
   background(clrBG);
-  smooth();
 
-  lightColor1 = loadImage(pathDATA + "color_001.png");
+  lightColor1 = loadImage(pathDATA + "color_003.jpg");
   
   user_canvas = createGraphics(width, height);
+  
+  leap = new LeapMotion(this);
 }
 
 
 void draw(){
-  updateCursor();
-  
-  // TAKE COLORS FROM IMAGE
-  lightPos1 = (cFrame*5)%lightColor1.width;
-
-  curLight1 = lightColor1.get(lightPos1,1);
-  curLight1R = red(curLight1);
-  curLight1G = green(curLight1);
-  curLight1B = blue(curLight1);
-  
   // Step 1: Paint background
-  background(clrBG, 0.1);
+  //background(clrBG, 0.1);
+  noStroke();
+  fill(0, 20);
+  rect(0,0, width,height);
   
   // Step 2: Print what user has drawn in the buffer
   image(user_canvas, 0, 0);
@@ -79,10 +83,9 @@ void draw(){
   }
   
   
-  // If user is pressing mouse, save their draws in the buffer so it will appear in next frame
-  if(mousePressed) {
-    bufferBrush();
-  }
+  getLeapValues();
+  updateCursor();
   
-  cFrame += strokesWidth; // Update from count to move in color position
+  cFrame += accel; // Update from count to move in color position
+  cFrameAccel += accel * 5;
 }

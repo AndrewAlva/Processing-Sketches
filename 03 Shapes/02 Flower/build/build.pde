@@ -15,7 +15,7 @@ int    stageW     = 1080;
 int    stageH     = 720;
 float  halfWidth, halfHeight;
 color  clrBG      = #090909;
-String pathDATA   = "../data/";
+String pathDATA = "../../_data/";
 boolean brushFlag = true;
 int    cFrame     = 0; // Custom frame count
 

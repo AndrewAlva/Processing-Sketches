@@ -1,10 +1,14 @@
 // Sketch vars
-float PI2 = PI * 2;
 int strokesWidth = 2;
+float lineHeight;
+float xDistance;
+int circleSteps = 20;
+float distortionRatio = 0;
 
   // For mouse smooth
 float cursorX, cursorY;
-float cof = 0.2;
+float cofX = 0.05;
+float cofY = 0.1;
 
 // ********************************************************************************************************************
 
@@ -45,12 +49,12 @@ void setup(){
   halfHeight = height / 2;
   
   cursorX = halfWidth;
-  cursorY = halfHeight; 
+  cursorY = halfHeight;
   
   background(clrBG);
   smooth();
 
-  lightColor1 = loadImage(pathDATA + "color_001.png");
+  lightColor1 = loadImage(pathDATA + "color_004.jpg");
   
   user_canvas = createGraphics(width, height);
 }
@@ -59,19 +63,15 @@ void setup(){
 void draw(){
   updateCursor();
   
-  // TAKE COLORS FROM IMAGE
-  lightPos1 = (cFrame*5)%lightColor1.width;
-
-  curLight1 = lightColor1.get(lightPos1,1);
-  curLight1R = red(curLight1);
-  curLight1G = green(curLight1);
-  curLight1B = blue(curLight1);
+  noStroke();
+  fill(0, 20);
+  rect(0,0, width,height);
   
   // Step 1: Paint background
-  background(clrBG, 0.1);
+  //background(clrBG);
   
   // Step 2: Print what user has drawn in the buffer
-  image(user_canvas, 0, 0);
+  //image(user_canvas, 0, 0);
   
   // Step 3: Show a preview of the brush
   if (brushFlag) {
